@@ -2,7 +2,7 @@ package com.amaap.pokerbesthandextension.repository.dto.validator;
 
 public class CardValidator {
     public static boolean isValidCode(String code) {
-        if (isNullCode(code) && isEmptyCode(code) && isInvalidCode(code))
+        if (isNullCode(code) || isEmptyCode(code) || isInvalidCode(code))
         {
             return false;
         }
