@@ -1,33 +1,31 @@
-package com.amaap.pokerbesthandextension.controller;
+package com.amaap.pokerbesthandextension.service;
 
 import com.amaap.pokerbesthandextension.controller.dto.HttpStatus;
 import com.amaap.pokerbesthandextension.controller.dto.Response;
 import com.amaap.pokerbesthandextension.repository.CardRepository;
 import com.amaap.pokerbesthandextension.repository.db.InMemoryDatabase;
 import com.amaap.pokerbesthandextension.repository.db.impl.FakeInMemoryDatabase;
+import com.amaap.pokerbesthandextension.repository.db.impl.exception.DuplicateCardException;
 import com.amaap.pokerbesthandextension.repository.dto.CardDto;
 import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidCardCodeException;
 import com.amaap.pokerbesthandextension.repository.impl.InMemoryCardRepository;
-import com.amaap.pokerbesthandextension.service.CardService;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class CardControllerTest {
+class CardServiceTest {
     InMemoryDatabase inMemoryDatabase = new FakeInMemoryDatabase();
     CardRepository cardRepository = new InMemoryCardRepository(inMemoryDatabase);
     CardService cardService = new CardService(cardRepository);
 
-    CardController cardController = new CardController(cardService);
-
     @Test
-    void shouldBeAbleToGetOkResponseWhenCardCreatedSuccessfully() throws InvalidCardCodeException {
+    void shouldBeAbleToGetOkResponseWhenCardCreatedSuccessfully() throws InvalidCardCodeException, DuplicateCardException {
         // arrange
         String code = "H4";
-        Response expected = new Response(HttpStatus.OK,"Card Created Successfully");
+        CardDto expected = new CardDto(code);
 
         // act
-        Response actual = cardController.create(code);
+        CardDto actual = cardService.create(code);
 
         // assert
         assertEquals(expected,actual);
