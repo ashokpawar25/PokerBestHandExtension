@@ -13,7 +13,7 @@ class FakeInMemoryDatabaseTest {
     FakeInMemoryDatabase fakeInMemoryDatabase = new FakeInMemoryDatabase();
 
     @Test
-    void shouldBeAbleToGetOkResponseWhenCardCreatedSuccessfully() throws DuplicateCardException {
+    void shouldBeAbleToAddCardIntoDatabase() throws DuplicateCardException {
         // arrange
         String code = "H4";
         CardDto expected = new CardDto(code);
@@ -23,5 +23,19 @@ class FakeInMemoryDatabaseTest {
 
         // assert
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldBeAbleToThrowExceptionWhenTryToAddDuplicateCardIntoDatabase() throws DuplicateCardException {
+        // arrange
+        String code = "H4";
+        CardDto card = new CardDto(code);
+
+
+        // act
+        fakeInMemoryDatabase.insertIntoCardTable(card);
+
+        // assert
+        assertThrows(DuplicateCardException.class,()->fakeInMemoryDatabase.insertIntoCardTable(card));
     }
 }

@@ -8,6 +8,7 @@ import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidCardCode
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class InMemoryCardRepositoryTest {
 
@@ -15,7 +16,7 @@ class InMemoryCardRepositoryTest {
     InMemoryCardRepository inMemoryCardRepository = new InMemoryCardRepository(inMemoryDatabase);
 
     @Test
-    void shouldBeAbleToGetOkResponseWhenCardCreatedSuccessfully() throws DuplicateCardException {
+    void shouldBeAbleToAddCardIntoRepository() throws DuplicateCardException {
         // arrange
         String code = "H4";
         CardDto expected = new CardDto(code);
@@ -25,5 +26,19 @@ class InMemoryCardRepositoryTest {
 
         // assert
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldBeAbleToThrowExceptionWhenTryToAddDuplicateCardIntoRepository() throws DuplicateCardException {
+        // arrange
+        String code = "H4";
+        CardDto card = new CardDto(code);
+
+
+        // act
+        inMemoryCardRepository.add(card);
+
+        // assert
+        assertThrows(DuplicateCardException.class,()->inMemoryCardRepository.add(card));
     }
 }

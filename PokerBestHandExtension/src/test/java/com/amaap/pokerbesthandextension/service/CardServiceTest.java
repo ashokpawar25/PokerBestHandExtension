@@ -19,7 +19,7 @@ class CardServiceTest {
     CardService cardService = new CardService(cardRepository);
 
     @Test
-    void shouldBeAbleToGetOkResponseWhenCardCreatedSuccessfully() throws InvalidCardCodeException, DuplicateCardException {
+    void shouldBeAbleToCreateCard() throws InvalidCardCodeException, DuplicateCardException {
         // arrange
         String code = "H4";
         CardDto expected = new CardDto(code);
@@ -29,5 +29,17 @@ class CardServiceTest {
 
         // assert
         assertEquals(expected,actual);
+    }
+
+    @Test
+    void shouldBeAbleToThrowExceptionWhenTryToCreateDuplicateCard() throws DuplicateCardException, InvalidCardCodeException {
+        // arrange
+        String code = "H4";
+
+        // act
+        cardService.create(code);
+
+        // assert
+        assertThrows(DuplicateCardException.class,()->cardService.create(code));
     }
 }
