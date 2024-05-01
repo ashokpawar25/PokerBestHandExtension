@@ -9,17 +9,17 @@ public class CardValidator {
         return true;
     }
 
-    private static boolean isInvalidCode(String code)
+    public static boolean isInvalidCode(String code)
     {
         return !code.matches("^[CHSD][ATKQJ2-9]$");
     }
 
-    private static boolean isEmptyCode(String code)
+    public static boolean isEmptyCode(String code)
     {
         return code.isEmpty();
     }
 
-    private static boolean isNullCode(String code)
+    public static boolean isNullCode(String code)
     {
         return code == null;
     }

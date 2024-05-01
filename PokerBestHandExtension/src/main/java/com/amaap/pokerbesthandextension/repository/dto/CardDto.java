@@ -1,9 +1,10 @@
 package com.amaap.pokerbesthandextension.repository.dto;
 
 import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidCardCodeException;
-import com.amaap.pokerbesthandextension.repository.dto.validator.CardValidator;
 
 import java.util.Objects;
+
+import static com.amaap.pokerbesthandextension.repository.dto.validator.CardValidator.isValidCode;
 
 public class CardDto {
     private final String code;
@@ -12,8 +13,9 @@ public class CardDto {
     }
 
     public static CardDto create(String code) throws InvalidCardCodeException {
-        if(!CardValidator.isValidCode(code)) throw new InvalidCardCodeException("Invalid Card code:"+code);
-        return new CardDto(code);
+        String cardCode = code.toUpperCase();
+        if(!isValidCode(cardCode)) throw new InvalidCardCodeException("Invalid Card code:"+code);
+        return new CardDto(cardCode);
     }
 
     @Override

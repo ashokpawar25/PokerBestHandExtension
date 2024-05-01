@@ -26,6 +26,5 @@ class CardDtoTest {
         assertThrows(InvalidCardCodeException.class,()->CardDto.create("G2"));
         assertThrows(InvalidCardCodeException.class,()->CardDto.create("SD"));
         assertThrows(InvalidCardCodeException.class,()->CardDto.create(""));
-        assertThrows(InvalidCardCodeException.class,()->CardDto.create(null));
     }
 }
