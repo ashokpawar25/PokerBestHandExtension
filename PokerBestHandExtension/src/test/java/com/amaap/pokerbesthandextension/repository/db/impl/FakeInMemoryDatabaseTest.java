@@ -38,4 +38,30 @@ class FakeInMemoryDatabaseTest {
         // assert
         assertThrows(DuplicateCardException.class,()->fakeInMemoryDatabase.insertIntoCardTable(card));
     }
+
+    @Test
+    void shouldBeAbleToGetCardByCode() throws DuplicateCardException {
+        // arrange
+        String code = "C8";
+        CardDto expected = new CardDto(code);
+        fakeInMemoryDatabase.insertIntoCardTable(expected);
+
+        // act
+        CardDto actual = fakeInMemoryDatabase.findCard(code);
+
+        // assert
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    void shouldBeAbleToGetNullWhenCardNotFoundIntoDatabase() {
+        // arrange
+        String code = "C8";
+
+        // act
+        CardDto actual = fakeInMemoryDatabase.findCard(code);
+
+        // assert
+        assertNull(actual);
+    }
 }

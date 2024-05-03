@@ -15,4 +15,9 @@ public class InMemoryCardRepository implements CardRepository {
     public CardDto add(CardDto card) throws DuplicateCardException {
         return inMemoryDatabase.insertIntoCardTable(card);
     }
+
+    @Override
+    public CardDto findCard(String code) {
+        return inMemoryDatabase.findCard(code);
+    }
 }

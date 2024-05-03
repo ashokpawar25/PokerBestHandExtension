@@ -42,4 +42,30 @@ class CardServiceTest {
         // assert
         assertThrows(DuplicateCardException.class,()->cardService.create(code));
     }
+
+    @Test
+    void shouldBeAbleToGetCardByCode() throws DuplicateCardException, InvalidCardCodeException {
+        // arrange
+        String code = "C8";
+        CardDto expected = new CardDto(code);
+        cardService.create(code);
+
+        // act
+        CardDto actual = cardService.get(code);
+
+        // assert
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldBeAbleToGetNullWhenCardNotFound(){
+        // arrange
+        String code = "C8";
+
+        // act
+        CardDto actual = cardService.get(code);
+
+        // assert
+        assertNull(actual);
+    }
 }

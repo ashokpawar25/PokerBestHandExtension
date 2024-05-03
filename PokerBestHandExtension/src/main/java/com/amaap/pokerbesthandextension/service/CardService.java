@@ -15,4 +15,8 @@ public class CardService {
         CardDto card = CardDto.create(code);
         return cardRepository.add(card);
     }
+
+    public CardDto get(String code) {
+        return cardRepository.findCard(code);
+    }
 }

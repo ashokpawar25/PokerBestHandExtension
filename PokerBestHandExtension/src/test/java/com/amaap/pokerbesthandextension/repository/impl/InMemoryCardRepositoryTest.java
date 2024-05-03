@@ -4,11 +4,9 @@ import com.amaap.pokerbesthandextension.repository.db.InMemoryDatabase;
 import com.amaap.pokerbesthandextension.repository.db.impl.FakeInMemoryDatabase;
 import com.amaap.pokerbesthandextension.repository.db.impl.exception.DuplicateCardException;
 import com.amaap.pokerbesthandextension.repository.dto.CardDto;
-import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidCardCodeException;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryCardRepositoryTest {
 
@@ -39,6 +37,32 @@ class InMemoryCardRepositoryTest {
         inMemoryCardRepository.add(card);
 
         // assert
-        assertThrows(DuplicateCardException.class,()->inMemoryCardRepository.add(card));
+        assertThrows(DuplicateCardException.class, () -> inMemoryCardRepository.add(card));
+    }
+
+    @Test
+    void shouldBeAbleToGetCardByCode() throws DuplicateCardException {
+        // arrange
+        String code = "C8";
+        CardDto expected = new CardDto(code);
+        inMemoryCardRepository.add(expected);
+
+        // act
+        CardDto actual = inMemoryCardRepository.findCard(code);
+
+        // assert
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldBeAbleToGetNullWhenCardNotFoundIntoDatabase(){
+        // arrange
+        String code = "C8";
+
+        // act
+        CardDto actual = inMemoryCardRepository.findCard(code);
+
+        // assert
+        assertNull(actual);
     }
 }

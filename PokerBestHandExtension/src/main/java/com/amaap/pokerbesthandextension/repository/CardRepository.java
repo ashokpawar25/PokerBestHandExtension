@@ -5,4 +5,6 @@ import com.amaap.pokerbesthandextension.repository.dto.CardDto;
 
 public interface CardRepository {
     CardDto add(CardDto card) throws DuplicateCardException;
+
+    CardDto findCard(String code);
 }

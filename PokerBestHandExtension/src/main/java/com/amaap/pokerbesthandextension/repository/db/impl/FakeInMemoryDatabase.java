@@ -19,4 +19,9 @@ public class FakeInMemoryDatabase implements InMemoryDatabase {
         cards.add(cardDto);
         return cardDto;
     }
+
+    @Override
+    public CardDto findCard(String code) {
+        return cards.stream().filter(card -> card.getCode().equalsIgnoreCase(code)).findFirst().orElse(null);
+    }
 }
