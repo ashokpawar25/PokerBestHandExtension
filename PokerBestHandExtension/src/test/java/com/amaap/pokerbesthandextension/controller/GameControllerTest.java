@@ -65,4 +65,18 @@ public class GameControllerTest {
         // assert
         assertEquals(expected,actual);
     }
+
+    @Test
+    void shouldBeAbleToCheckFourOfAKindRankForHand() throws InvalidHandSizeException, HandNotFoundException, InvalidCardCodeException {
+        // arrange
+        List<CardDto> cards = CardBuilder.getCardsForFourOfAKindRank();
+        HandRank expected = HandRank.FOUROFAKIND;
+
+        // act
+        Hand hand = handService.create(cards);
+        HandRank actual = gameController.checkRankFor(hand);
+
+        // assert
+        assertEquals(expected,actual);
+    }
 }

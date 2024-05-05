@@ -50,4 +50,13 @@ public class CardBuilder {
         CardDto card5 = CardDto.create("D4");
         return List.of(card1,card2,card3,card4,card5);
     }
+
+    public static List<CardDto> getCardsForFourOfAKindRank() throws InvalidCardCodeException {
+        CardDto card1 = CardDto.create("H4");
+        CardDto card2 = CardDto.create("C4");
+        CardDto card3 = CardDto.create("C4");
+        CardDto card4 = CardDto.create("SJ");
+        CardDto card5 = CardDto.create("D4");
+        return List.of(card1,card2,card3,card4,card5);
+    }
 }

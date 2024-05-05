@@ -10,12 +10,7 @@ public class FlushRankEvaluator implements RankEvaluator {
 
     @Override
     public HandRank getRank(List<CardDto> cards) {
-        if (isFlushRank(cards)) {
-            return HandRank.FLUSH;
-        } else if (nextEvaluator != null) {
-            return nextEvaluator.getRank(cards);
-        } else
-            return null;
+        return isFlushRank(cards) ? HandRank.FLUSH : (nextEvaluator != null ? nextEvaluator.getRank(cards) : null);
     }
 
     private boolean isFlushRank(List<CardDto> cards) {
