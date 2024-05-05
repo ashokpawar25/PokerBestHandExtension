@@ -5,6 +5,7 @@ import com.amaap.pokerbesthandextension.repository.HandRepository;
 import com.amaap.pokerbesthandextension.repository.db.InMemoryDatabase;
 import com.amaap.pokerbesthandextension.repository.db.impl.FakeInMemoryDatabase;
 import com.amaap.pokerbesthandextension.repository.db.impl.exception.DuplicateCardException;
+import com.amaap.pokerbesthandextension.repository.db.impl.exception.HandNotFoundException;
 import com.amaap.pokerbesthandextension.repository.dto.CardDto;
 import com.amaap.pokerbesthandextension.repository.dto.Hand;
 import com.amaap.pokerbesthandextension.repository.dto.builder.CardBuilder;
@@ -48,6 +49,20 @@ public class HandControllerTest {
 
         // act
         Response actual = handController.create(cards);
+
+        // assert
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldBeAbleToGetListOfCardsForHand() throws HandNotFoundException{
+        // arrange
+        List<CardDto> expected = CardBuilder.getFiveCards();
+        Hand hand = new Hand(expected);
+
+        // act
+        handController.create(expected);
+        List<CardDto> actual = handController.getCardsForHand(hand);
 
         // assert
         assertEquals(expected, actual);

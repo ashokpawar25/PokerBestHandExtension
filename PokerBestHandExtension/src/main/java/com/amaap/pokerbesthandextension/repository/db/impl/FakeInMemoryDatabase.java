@@ -2,6 +2,7 @@ package com.amaap.pokerbesthandextension.repository.db.impl;
 
 import com.amaap.pokerbesthandextension.repository.db.InMemoryDatabase;
 import com.amaap.pokerbesthandextension.repository.db.impl.exception.DuplicateCardException;
+import com.amaap.pokerbesthandextension.repository.db.impl.exception.HandNotFoundException;
 import com.amaap.pokerbesthandextension.repository.dto.CardDto;
 import com.amaap.pokerbesthandextension.repository.dto.Hand;
 
@@ -31,5 +32,11 @@ public class FakeInMemoryDatabase implements InMemoryDatabase {
     public Hand insertIntoHandTable(Hand hand) {
         hands.add(hand);
         return hand;
+    }
+
+    @Override
+    public List<CardDto> getCardsForHand(Hand hand) throws HandNotFoundException {
+        if(hands.contains(hand)) return hand.getCards();
+        else throw new HandNotFoundException("Hand not found");
     }
 }

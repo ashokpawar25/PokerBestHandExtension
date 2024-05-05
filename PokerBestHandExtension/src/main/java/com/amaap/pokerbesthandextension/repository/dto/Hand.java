@@ -17,6 +17,10 @@ public class Hand {
         return new Hand(cards);
     }
 
+    public List<CardDto> getCards() {
+        return cards;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

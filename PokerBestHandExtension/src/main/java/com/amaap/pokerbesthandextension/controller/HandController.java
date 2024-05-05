@@ -2,6 +2,7 @@ package com.amaap.pokerbesthandextension.controller;
 
 import com.amaap.pokerbesthandextension.controller.dto.HttpStatus;
 import com.amaap.pokerbesthandextension.controller.dto.Response;
+import com.amaap.pokerbesthandextension.repository.db.impl.exception.HandNotFoundException;
 import com.amaap.pokerbesthandextension.repository.dto.CardDto;
 import com.amaap.pokerbesthandextension.repository.dto.Hand;
 import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidHandSizeException;
@@ -24,4 +25,7 @@ public class HandController {
         }
     }
 
+    public List<CardDto> getCardsForHand(Hand hand) throws HandNotFoundException {
+        return handService.getCardsForHand(hand);
+    }
 }

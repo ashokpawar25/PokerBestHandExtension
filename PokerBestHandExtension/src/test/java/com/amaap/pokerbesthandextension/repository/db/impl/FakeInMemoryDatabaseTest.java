@@ -1,12 +1,10 @@
 package com.amaap.pokerbesthandextension.repository.db.impl;
 
 import com.amaap.pokerbesthandextension.repository.db.impl.exception.DuplicateCardException;
+import com.amaap.pokerbesthandextension.repository.db.impl.exception.HandNotFoundException;
 import com.amaap.pokerbesthandextension.repository.dto.CardDto;
 import com.amaap.pokerbesthandextension.repository.dto.Hand;
 import com.amaap.pokerbesthandextension.repository.dto.builder.CardBuilder;
-import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidCardCodeException;
-import com.amaap.pokerbesthandextension.repository.impl.InMemoryCardRepository;
-import com.amaap.pokerbesthandextension.service.CardService;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -69,13 +67,27 @@ class FakeInMemoryDatabaseTest {
     }
 
     @Test
-    void shouldBeAbleToAddHandInDatabase(){
+    void shouldBeAbleToAddHandInDatabase() {
         // arrange
         List<CardDto> cards = CardBuilder.getFiveCards();
         Hand expected = new Hand(cards);
 
         // act
         Hand actual = fakeInMemoryDatabase.insertIntoHandTable(expected);
+
+        // assert
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldBeAbleToGetListOfCardsForHand() throws HandNotFoundException {
+        // arrange
+        List<CardDto> expected = CardBuilder.getFiveCards();
+        Hand hand = new Hand(expected);
+
+        // act
+        fakeInMemoryDatabase.insertIntoHandTable(hand);
+        List<CardDto> actual = fakeInMemoryDatabase.getCardsForHand(hand);
 
         // assert
         assertEquals(expected, actual);
