@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class HandControllerTest {
     InMemoryDatabase inMemoryDatabase = new FakeInMemoryDatabase();
@@ -68,4 +69,13 @@ public class HandControllerTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void shouldBeAbleToThrowExceptionWhenHandNotFound() throws InvalidHandSizeException {
+        // arrange
+        List<CardDto> cards = CardBuilder.getFiveCards();
+        Hand hand = Hand.create(cards);
+
+        // act & assert
+        assertThrows(HandNotFoundException.class,()->handController.getCardsForHand(hand));
+    }
 }

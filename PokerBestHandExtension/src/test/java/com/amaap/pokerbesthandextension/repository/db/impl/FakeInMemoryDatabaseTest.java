@@ -5,6 +5,7 @@ import com.amaap.pokerbesthandextension.repository.db.impl.exception.HandNotFoun
 import com.amaap.pokerbesthandextension.repository.dto.CardDto;
 import com.amaap.pokerbesthandextension.repository.dto.Hand;
 import com.amaap.pokerbesthandextension.repository.dto.builder.CardBuilder;
+import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidHandSizeException;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -91,5 +92,15 @@ class FakeInMemoryDatabaseTest {
 
         // assert
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldBeAbleToThrowExceptionWhenHandNotFoundInDatabase() throws InvalidHandSizeException {
+        // arrange
+        List<CardDto> cards = CardBuilder.getFiveCards();
+        Hand hand = Hand.create(cards);
+
+        // act & assert
+        assertThrows(HandNotFoundException.class,()->fakeInMemoryDatabase.getCardsForHand(hand));
     }
 }

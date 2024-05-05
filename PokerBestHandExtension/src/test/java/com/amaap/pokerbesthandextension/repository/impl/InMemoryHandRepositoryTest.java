@@ -8,12 +8,14 @@ import com.amaap.pokerbesthandextension.repository.dto.CardDto;
 import com.amaap.pokerbesthandextension.repository.dto.Hand;
 import com.amaap.pokerbesthandextension.repository.dto.builder.CardBuilder;
 import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidCardCodeException;
+import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidHandSizeException;
 import com.amaap.pokerbesthandextension.service.CardService;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class InMemoryHandRepositoryTest {
 
@@ -45,5 +47,15 @@ class InMemoryHandRepositoryTest {
 
         // assert
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldBeAbleToThrowExceptionWhenHandNotFoundInDatabase() throws InvalidHandSizeException {
+        // arrange
+        List<CardDto> cards = CardBuilder.getFiveCards();
+        Hand hand = Hand.create(cards);
+
+        // act & assert
+        assertThrows(HandNotFoundException.class,()->inMemoryHandRepository.getCardsForHand(hand));
     }
 }
