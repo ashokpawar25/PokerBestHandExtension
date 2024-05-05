@@ -9,8 +9,9 @@ public class HandEvaluatorChain {
     RankEvaluator rankEvaluator;
     public HandEvaluatorChain()
     {
-        this.rankEvaluator = new FlushRankEvaluator();
-        this.rankEvaluator.setNextEvaluator(new PairRankEvaluator());
+        this.rankEvaluator = new ThreeOfAKindRankEvaluator()
+                .setNextEvaluator(new PairRankEvaluator()
+                .setNextEvaluator(new FlushRankEvaluator()));
     }
     public HandRank getRank(List<CardDto> cards) {
         return rankEvaluator.getRank(cards);

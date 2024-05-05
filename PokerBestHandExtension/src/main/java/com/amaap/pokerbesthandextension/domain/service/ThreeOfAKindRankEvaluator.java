@@ -5,29 +5,32 @@ import com.amaap.pokerbesthandextension.repository.dto.CardDto;
 
 import java.util.List;
 
-public class PairRankEvaluator implements RankEvaluator {
+public class ThreeOfAKindRankEvaluator implements RankEvaluator {
     private RankEvaluator nextEvaluator;
 
     @Override
     public HandRank getRank(List<CardDto> cards) {
-        if (isPairRank(cards)) {
-            return HandRank.PAIR;
-        } else if (nextEvaluator != null) {
+        if (isThreeOfAKindRank(cards)){
+            return HandRank.THREEOFAKIND;
+        }
+        else if (nextEvaluator != null) {
             return nextEvaluator.getRank(cards);
         } else {
             return null;
         }
     }
 
-    private boolean isPairRank(List<CardDto> cards) {
+    private boolean isThreeOfAKindRank(List<CardDto> cards) {
         CardDto[] cardsArray = cards.toArray(new CardDto[0]);
-        for (int i = 0; i < cardsArray.length; i++) {
-            for (int j = i + 1; j < cardsArray.length; j++) {
+        int count = 0;
+        for (int i = 0; i < cards.size(); i++) {
+            for (int j = i + 1; j < cards.size(); j++) {
                 if (cardsArray[i].getRank().equalsIgnoreCase(cardsArray[j].getRank())) {
-                    return true;
+                    count++;
                 }
             }
         }
+        if (count >= 3) return true;
         return false;
     }
 

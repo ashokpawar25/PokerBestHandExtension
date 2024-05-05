@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface RankEvaluator {
     HandRank getRank(List<CardDto> cards);
-    void setNextEvaluator(RankEvaluator nextChecker);
+    RankEvaluator setNextEvaluator(RankEvaluator nextEvaluator);
 }

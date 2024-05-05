@@ -28,7 +28,8 @@ public class FlushRankEvaluator implements RankEvaluator {
         return true;
     }
 
-    public void setNextEvaluator(RankEvaluator nextEvaluator) {
+    public RankEvaluator setNextEvaluator(RankEvaluator nextEvaluator) {
         this.nextEvaluator = nextEvaluator;
+        return this;
     }
 }
