@@ -1,4 +1,6 @@
 package com.amaap.pokerbesthandextension.controller;
+import com.amaap.pokerbesthandextension.controller.dto.HttpStatus;
+import com.amaap.pokerbesthandextension.controller.dto.Response;
 import com.amaap.pokerbesthandextension.repository.HandRepository;
 import com.amaap.pokerbesthandextension.repository.db.InMemoryDatabase;
 import com.amaap.pokerbesthandextension.repository.db.impl.FakeInMemoryDatabase;
@@ -25,13 +27,27 @@ public class HandControllerTest {
     HandController handController = new HandController(handService);
 
     @Test
-    void shouldBeAbleToCreateHand() throws InvalidHandSizeException {
+    void shouldBeAbleToGetOkResponseWhenCreateHand(){
         // arrange
         List<CardDto> cards = CardBuilder.getFiveCards();
-        Hand expected = new Hand(cards);
+        Response expected = new Response(HttpStatus.OK,"Hand Created successfully");
 
         // act
-        Hand actual = handController.create(cards);
+        Response actual = handController.create(cards);
+
+        // assert
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldBeAbleToGetBadRequestAsResponseWhenHandSizeIsInvalid()
+    {
+        // arrange
+        List<CardDto> cards = CardBuilder.getFourCards();
+        Response expected = new Response(HttpStatus.BAD_REQUEST,"Invalid hand size "+cards.size());
+
+        // act
+        Response actual = handController.create(cards);
 
         // assert
         assertEquals(expected, actual);

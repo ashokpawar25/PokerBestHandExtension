@@ -1,5 +1,6 @@
 package com.amaap.pokerbesthandextension.controller;
 
+import com.amaap.pokerbesthandextension.controller.dto.HttpStatus;
 import com.amaap.pokerbesthandextension.controller.dto.Response;
 import com.amaap.pokerbesthandextension.repository.dto.CardDto;
 import com.amaap.pokerbesthandextension.repository.dto.Hand;
@@ -14,8 +15,13 @@ public class HandController {
         this.handService = handService;
     }
 
-    public Hand create(List<CardDto> cards) throws InvalidHandSizeException {
-        return handService.create(cards);
+    public Response create(List<CardDto> cards){
+        try {
+            handService.create(cards);
+            return new Response(HttpStatus.OK,"Hand Created successfully");
+        } catch (InvalidHandSizeException e) {
+            return new Response(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 
 }
