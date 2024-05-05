@@ -27,6 +27,11 @@ public class CardDto {
         return String.valueOf(code.charAt(0));
     }
 
+    public String getRank()
+    {
+        return String.valueOf(code.charAt(1));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

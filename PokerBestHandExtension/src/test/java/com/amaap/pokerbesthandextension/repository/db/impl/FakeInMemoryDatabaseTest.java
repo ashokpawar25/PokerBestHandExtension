@@ -5,6 +5,7 @@ import com.amaap.pokerbesthandextension.repository.db.impl.exception.HandNotFoun
 import com.amaap.pokerbesthandextension.repository.dto.CardDto;
 import com.amaap.pokerbesthandextension.repository.dto.Hand;
 import com.amaap.pokerbesthandextension.repository.dto.builder.CardBuilder;
+import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidCardCodeException;
 import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidHandSizeException;
 import org.junit.jupiter.api.Test;
 
@@ -68,7 +69,7 @@ class FakeInMemoryDatabaseTest {
     }
 
     @Test
-    void shouldBeAbleToAddHandInDatabase() {
+    void shouldBeAbleToAddHandInDatabase() throws InvalidCardCodeException {
         // arrange
         List<CardDto> cards = CardBuilder.getFiveCards();
         Hand expected = new Hand(cards);
@@ -81,7 +82,7 @@ class FakeInMemoryDatabaseTest {
     }
 
     @Test
-    void shouldBeAbleToGetListOfCardsForHand() throws HandNotFoundException {
+    void shouldBeAbleToGetListOfCardsForHand() throws HandNotFoundException, InvalidCardCodeException {
         // arrange
         List<CardDto> expected = CardBuilder.getFiveCards();
         Hand hand = new Hand(expected);
@@ -95,7 +96,7 @@ class FakeInMemoryDatabaseTest {
     }
 
     @Test
-    void shouldBeAbleToThrowExceptionWhenHandNotFoundInDatabase() throws InvalidHandSizeException {
+    void shouldBeAbleToThrowExceptionWhenHandNotFoundInDatabase() throws InvalidHandSizeException, InvalidCardCodeException {
         // arrange
         List<CardDto> cards = CardBuilder.getFiveCards();
         Hand hand = Hand.create(cards);

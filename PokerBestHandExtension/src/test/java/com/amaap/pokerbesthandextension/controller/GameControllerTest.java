@@ -7,6 +7,7 @@ import com.amaap.pokerbesthandextension.repository.db.impl.exception.HandNotFoun
 import com.amaap.pokerbesthandextension.repository.dto.CardDto;
 import com.amaap.pokerbesthandextension.repository.dto.Hand;
 import com.amaap.pokerbesthandextension.repository.dto.builder.CardBuilder;
+import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidCardCodeException;
 import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidHandSizeException;
 import com.amaap.pokerbesthandextension.repository.impl.InMemoryHandRepository;
 import com.amaap.pokerbesthandextension.service.GameService;
@@ -24,10 +25,24 @@ public class GameControllerTest {
     GameController gameController = new GameController(gameService);
 
     @Test
-    void shouldBeAbleToCheckFlushRankForHand() throws InvalidHandSizeException, HandNotFoundException {
+    void shouldBeAbleToCheckFlushRankForHand() throws InvalidHandSizeException, HandNotFoundException, InvalidCardCodeException {
         // arrange
         List<CardDto> cards = CardBuilder.getCardsForFlushRank();
         HandRank expected = HandRank.FLUSH;
+
+        // act
+        Hand hand = handService.create(cards);
+        HandRank actual = gameController.checkRankFor(hand);
+
+        // assert
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    void shouldBeAbleToCheckPairRankForHand() throws InvalidHandSizeException, HandNotFoundException, InvalidCardCodeException {
+        // arrange
+        List<CardDto> cards = CardBuilder.getCardsForPairRank();
+        HandRank expected = HandRank.PAIR;
 
         // act
         Hand hand = handService.create(cards);

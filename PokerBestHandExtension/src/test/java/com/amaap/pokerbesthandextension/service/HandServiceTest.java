@@ -26,7 +26,7 @@ class HandServiceTest {
     HandService handService = new HandService(handRepository);
 
     @Test
-    void shouldBeAbleToCreateHand() throws InvalidHandSizeException {
+    void shouldBeAbleToCreateHand() throws InvalidHandSizeException, InvalidCardCodeException {
         // arrange
         List<CardDto> cards = CardBuilder.getFiveCards();
         Hand expected = new Hand(cards);
@@ -39,7 +39,7 @@ class HandServiceTest {
     }
 
     @Test
-    void shouldBeAbleToGetListOfCardsForHand() throws HandNotFoundException, InvalidHandSizeException {
+    void shouldBeAbleToGetListOfCardsForHand() throws HandNotFoundException, InvalidHandSizeException, InvalidCardCodeException {
         // arrange
         List<CardDto> expected = CardBuilder.getFiveCards();
         Hand hand = new Hand(expected);
@@ -53,7 +53,7 @@ class HandServiceTest {
     }
 
     @Test
-    void shouldBeAbleToThrowExceptionWhenHandNotFound() throws InvalidHandSizeException {
+    void shouldBeAbleToThrowExceptionWhenHandNotFound() throws InvalidHandSizeException, InvalidCardCodeException {
         // arrange
         List<CardDto> cards = CardBuilder.getFiveCards();
         Hand hand = Hand.create(cards);

@@ -1,34 +1,44 @@
 package com.amaap.pokerbesthandextension.repository.dto.builder;
 
 import com.amaap.pokerbesthandextension.repository.dto.CardDto;
+import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidCardCodeException;
 
 import java.util.List;
 
 public class CardBuilder {
 
-    public static List<CardDto> getFiveCards() {
-        CardDto card1 = new CardDto("H4");
-        CardDto card2 = new CardDto("C7");
-        CardDto card3 = new CardDto("CT");
-        CardDto card4 = new CardDto("SJ");
-        CardDto card5 = new CardDto("DK");
+    public static List<CardDto> getFiveCards() throws InvalidCardCodeException {
+        CardDto card1 = CardDto.create("H4");
+        CardDto card2 = CardDto.create("C7");
+        CardDto card3 = CardDto.create("CT");
+        CardDto card4 = CardDto.create("SJ");
+        CardDto card5 = CardDto.create("DK");
         return List.of(card1,card2,card3,card4,card5);
     }
 
-    public static List<CardDto> getFourCards() {
-        CardDto card1 = new CardDto("H4");
-        CardDto card2 = new CardDto("C7");
-        CardDto card3 = new CardDto("CT");
-        CardDto card4 = new CardDto("SJ");
+    public static List<CardDto> getFourCards() throws InvalidCardCodeException {
+        CardDto card1 = CardDto.create("H4");
+        CardDto card2 = CardDto.create("C7");
+        CardDto card3 = CardDto.create("CT");
+        CardDto card4 = CardDto.create("SJ");
         return List.of(card1,card2,card3,card4);
     }
 
-    public static List<CardDto> getCardsForFlushRank() {
-        CardDto card1 = new CardDto("C4");
-        CardDto card2 = new CardDto("C7");
-        CardDto card3 = new CardDto("CT");
-        CardDto card4 = new CardDto("CJ");
-        CardDto card5 = new CardDto("CK");
+    public static List<CardDto> getCardsForFlushRank() throws InvalidCardCodeException {
+        CardDto card1 = CardDto.create("C4");
+        CardDto card2 = CardDto.create("C7");
+        CardDto card3 = CardDto.create("CT");
+        CardDto card4 = CardDto.create("CJ");
+        CardDto card5 = CardDto.create("CK");
+        return List.of(card1,card2,card3,card4,card5);
+    }
+
+    public static List<CardDto> getCardsForPairRank() throws InvalidCardCodeException {
+        CardDto card1 = CardDto.create("H4");
+        CardDto card2 = CardDto.create("C7");
+        CardDto card3 = CardDto.create("CT");
+        CardDto card4 = CardDto.create("SJ");
+        CardDto card5 = CardDto.create("D4");
         return List.of(card1,card2,card3,card4,card5);
     }
 }

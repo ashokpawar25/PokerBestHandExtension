@@ -23,7 +23,7 @@ class InMemoryHandRepositoryTest {
     InMemoryHandRepository inMemoryHandRepository = new InMemoryHandRepository(inMemoryDatabase);
 
     @Test
-    void shouldBeAbleToAddHandInRepository() {
+    void shouldBeAbleToAddHandInRepository() throws InvalidCardCodeException {
         // arrange
         List<CardDto> cards = CardBuilder.getFiveCards();
         Hand expected = new Hand(cards);
@@ -36,7 +36,7 @@ class InMemoryHandRepositoryTest {
     }
 
     @Test
-    void shouldBeAbleToGetListOfCardsForHand() throws HandNotFoundException {
+    void shouldBeAbleToGetListOfCardsForHand() throws HandNotFoundException, InvalidCardCodeException {
         // arrange
         List<CardDto> expected = CardBuilder.getFiveCards();
         Hand hand = new Hand(expected);
@@ -50,7 +50,7 @@ class InMemoryHandRepositoryTest {
     }
 
     @Test
-    void shouldBeAbleToThrowExceptionWhenHandNotFoundInDatabase() throws InvalidHandSizeException {
+    void shouldBeAbleToThrowExceptionWhenHandNotFoundInDatabase() throws InvalidHandSizeException, InvalidCardCodeException {
         // arrange
         List<CardDto> cards = CardBuilder.getFiveCards();
         Hand hand = Hand.create(cards);

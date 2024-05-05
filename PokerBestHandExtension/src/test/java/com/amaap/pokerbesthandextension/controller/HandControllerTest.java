@@ -29,7 +29,7 @@ public class HandControllerTest {
     HandController handController = new HandController(handService);
 
     @Test
-    void shouldBeAbleToGetOkResponseWhenCreateHand(){
+    void shouldBeAbleToGetOkResponseWhenCreateHand() throws InvalidCardCodeException {
         // arrange
         List<CardDto> cards = CardBuilder.getFiveCards();
         Response expected = new Response(HttpStatus.OK,"Hand Created successfully");
@@ -42,8 +42,7 @@ public class HandControllerTest {
     }
 
     @Test
-    void shouldBeAbleToGetBadRequestAsResponseWhenHandSizeIsInvalid()
-    {
+    void shouldBeAbleToGetBadRequestAsResponseWhenHandSizeIsInvalid() throws InvalidCardCodeException {
         // arrange
         List<CardDto> cards = CardBuilder.getFourCards();
         Response expected = new Response(HttpStatus.BAD_REQUEST,"Invalid hand size "+cards.size());
@@ -56,7 +55,7 @@ public class HandControllerTest {
     }
 
     @Test
-    void shouldBeAbleToGetListOfCardsForHand() throws HandNotFoundException{
+    void shouldBeAbleToGetListOfCardsForHand() throws HandNotFoundException, InvalidCardCodeException {
         // arrange
         List<CardDto> expected = CardBuilder.getFiveCards();
         Hand hand = new Hand(expected);
@@ -70,7 +69,7 @@ public class HandControllerTest {
     }
 
     @Test
-    void shouldBeAbleToThrowExceptionWhenHandNotFound() throws InvalidHandSizeException {
+    void shouldBeAbleToThrowExceptionWhenHandNotFound() throws InvalidHandSizeException, InvalidCardCodeException {
         // arrange
         List<CardDto> cards = CardBuilder.getFiveCards();
         Hand hand = Hand.create(cards);

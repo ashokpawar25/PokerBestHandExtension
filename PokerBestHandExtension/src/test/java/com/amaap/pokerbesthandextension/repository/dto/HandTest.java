@@ -1,6 +1,7 @@
 package com.amaap.pokerbesthandextension.repository.dto;
 
 import com.amaap.pokerbesthandextension.repository.dto.builder.CardBuilder;
+import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidCardCodeException;
 import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidHandSizeException;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class HandTest {
 
     @Test
-    void shouldBeAbleToCreateHand() throws InvalidHandSizeException {
+    void shouldBeAbleToCreateHand() throws InvalidHandSizeException, InvalidCardCodeException {
         // arrange
         List<CardDto> cards = CardBuilder.getFiveCards();
         Hand expected = new Hand(cards);
@@ -24,8 +25,7 @@ class HandTest {
     }
 
     @Test
-    void shouldBeAbleToThrowExceptionWhenTryToCreateHandWithNumberOfCardOtherThanFive()
-    {
+    void shouldBeAbleToThrowExceptionWhenTryToCreateHandWithNumberOfCardOtherThanFive() throws InvalidCardCodeException {
         // arrange
         List<CardDto> cards = CardBuilder.getFourCards();
 
