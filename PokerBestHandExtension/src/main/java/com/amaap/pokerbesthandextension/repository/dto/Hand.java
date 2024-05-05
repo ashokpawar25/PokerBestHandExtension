@@ -1,5 +1,7 @@
 package com.amaap.pokerbesthandextension.repository.dto;
 
+import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidHandSizeException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -10,7 +12,8 @@ public class Hand {
         this.cards = cards;
     }
 
-    public static Hand create(List<CardDto> cards) {
+    public static Hand create(List<CardDto> cards) throws InvalidHandSizeException {
+        if(cards.size() != 5) throw new InvalidHandSizeException("Invalid hand size "+cards.size());
         return new Hand(cards);
     }
 
