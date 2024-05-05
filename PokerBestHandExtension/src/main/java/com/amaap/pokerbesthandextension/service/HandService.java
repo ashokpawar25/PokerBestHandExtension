@@ -9,7 +9,7 @@ import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidHandSize
 import java.util.List;
 
 public class HandService {
-    HandRepository handRepository;
+    private final HandRepository handRepository;
     public HandService(HandRepository handRepository) {
         this.handRepository = handRepository;
     }

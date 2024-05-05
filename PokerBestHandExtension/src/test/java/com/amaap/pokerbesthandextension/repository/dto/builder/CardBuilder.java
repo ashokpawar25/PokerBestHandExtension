@@ -22,4 +22,13 @@ public class CardBuilder {
         CardDto card4 = new CardDto("SJ");
         return List.of(card1,card2,card3,card4);
     }
+
+    public static List<CardDto> getCardsForFlushRank() {
+        CardDto card1 = new CardDto("C4");
+        CardDto card2 = new CardDto("C7");
+        CardDto card3 = new CardDto("CT");
+        CardDto card4 = new CardDto("CJ");
+        CardDto card5 = new CardDto("CK");
+        return List.of(card1,card2,card3,card4,card5);
+    }
 }

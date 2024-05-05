@@ -22,6 +22,11 @@ public class CardDto {
         return code;
     }
 
+    public String getSuit()
+    {
+        return String.valueOf(code.charAt(0));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
