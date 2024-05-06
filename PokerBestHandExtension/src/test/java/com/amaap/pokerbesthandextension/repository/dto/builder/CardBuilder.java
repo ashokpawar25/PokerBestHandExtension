@@ -59,4 +59,13 @@ public class CardBuilder {
         CardDto card5 = CardDto.create("D4");
         return List.of(card1,card2,card3,card4,card5);
     }
+
+    public static List<CardDto> getCardsForStraightRank() throws InvalidCardCodeException {
+        CardDto card1 = CardDto.create("HT");
+        CardDto card2 = CardDto.create("CJ");
+        CardDto card3 = CardDto.create("C8");
+        CardDto card4 = CardDto.create("S7");
+        CardDto card5 = CardDto.create("D9");
+        return List.of(card1,card2,card3,card4,card5);
+    }
 }

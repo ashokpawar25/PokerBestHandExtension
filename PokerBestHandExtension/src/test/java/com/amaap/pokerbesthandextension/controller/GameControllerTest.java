@@ -79,4 +79,18 @@ public class GameControllerTest {
         // assert
         assertEquals(expected,actual);
     }
+
+    @Test
+    void shouldBeAbleToCheckStraightRankForHand() throws InvalidHandSizeException, HandNotFoundException, InvalidCardCodeException {
+        // arrange
+        List<CardDto> cards = CardBuilder.getCardsForStraightRank();
+        HandRank expected = HandRank.STRAIGHT;
+
+        // act
+        Hand hand = handService.create(cards);
+        HandRank actual = gameController.checkRankFor(hand);
+
+        // assert
+        assertEquals(expected,actual);
+    }
 }
