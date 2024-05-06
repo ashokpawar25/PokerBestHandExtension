@@ -1,4 +1,4 @@
-package com.amaap.pokerbesthandextension.controller;
+package com.amaap.pokerbesthandextension.service;
 
 import com.amaap.pokerbesthandextension.domain.model.valueobject.HandRank;
 import com.amaap.pokerbesthandextension.domain.service.HandEvaluatorChain;
@@ -10,19 +10,16 @@ import com.amaap.pokerbesthandextension.repository.dto.builder.CardBuilder;
 import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidCardCodeException;
 import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidHandSizeException;
 import com.amaap.pokerbesthandextension.repository.impl.InMemoryHandRepository;
-import com.amaap.pokerbesthandextension.service.GameService;
-import com.amaap.pokerbesthandextension.service.HandService;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class GameControllerTest {
+class GameServiceTest {
     HandEvaluatorChain handEvaluatorChain = new HandEvaluatorChain();
     HandService handService = new HandService(new InMemoryHandRepository(new FakeInMemoryDatabase()));
-    GameService gameService = new GameService(handEvaluatorChain,handService);
-    GameController gameController = new GameController(gameService);
+    GameService gameService = new GameService(handEvaluatorChain, handService);
 
     @Test
     void shouldBeAbleToCheckFlushRankForHand() throws InvalidHandSizeException, HandNotFoundException, InvalidCardCodeException {
@@ -32,10 +29,10 @@ public class GameControllerTest {
 
         // act
         Hand hand = handService.create(cards);
-        HandRank actual = gameController.checkRankFor(hand);
+        HandRank actual = gameService.checkRankFor(hand);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -46,10 +43,10 @@ public class GameControllerTest {
 
         // act
         Hand hand = handService.create(cards);
-        HandRank actual = gameController.checkRankFor(hand);
+        HandRank actual = gameService.checkRankFor(hand);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -60,10 +57,10 @@ public class GameControllerTest {
 
         // act
         Hand hand = handService.create(cards);
-        HandRank actual = gameController.checkRankFor(hand);
+        HandRank actual = gameService.checkRankFor(hand);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -74,10 +71,10 @@ public class GameControllerTest {
 
         // act
         Hand hand = handService.create(cards);
-        HandRank actual = gameController.checkRankFor(hand);
+        HandRank actual = gameService.checkRankFor(hand);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -88,10 +85,10 @@ public class GameControllerTest {
 
         // act
         Hand hand = handService.create(cards);
-        HandRank actual = gameController.checkRankFor(hand);
+        HandRank actual = gameService.checkRankFor(hand);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -102,10 +99,10 @@ public class GameControllerTest {
 
         // act
         Hand hand = handService.create(cards);
-        HandRank actual = gameController.checkRankFor(hand);
+        HandRank actual = gameService.checkRankFor(hand);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -116,10 +113,10 @@ public class GameControllerTest {
 
         // act
         Hand hand = handService.create(cards);
-        HandRank actual = gameController.checkRankFor(hand);
+        HandRank actual = gameService.checkRankFor(hand);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -130,10 +127,10 @@ public class GameControllerTest {
 
         // act
         Hand hand = handService.create(cards);
-        HandRank actual = gameController.checkRankFor(hand);
+        HandRank actual = gameService.checkRankFor(hand);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -144,9 +141,9 @@ public class GameControllerTest {
 
         // act
         Hand hand = handService.create(cards);
-        HandRank actual = gameController.checkRankFor(hand);
+        HandRank actual = gameService.checkRankFor(hand);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 }

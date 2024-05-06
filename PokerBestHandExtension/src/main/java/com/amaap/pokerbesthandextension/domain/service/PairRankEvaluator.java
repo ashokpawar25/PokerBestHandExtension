@@ -10,7 +10,7 @@ public class PairRankEvaluator implements RankEvaluator {
 
     @Override
     public HandRank getRank(List<CardDto> cards) {
-        return isPairRank(cards) ? HandRank.PAIR : (nextEvaluator != null ? nextEvaluator.getRank(cards) : null);
+        return isPairRank(cards) ? HandRank.PAIR : (nextEvaluator != null ? nextEvaluator.getRank(cards) : HandRank.HIGHCARD);
     }
 
     private boolean isPairRank(List<CardDto> cards) {

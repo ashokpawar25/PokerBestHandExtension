@@ -24,16 +24,4 @@ class PairRankEvaluatorTest {
         // assert
         assertEquals(expected,actual);
     }
-
-    @Test
-    void shouldBeAbleToGetNullWhenRankIsNotPair() throws InvalidCardCodeException {
-        // arrange
-        List<CardDto> cards = CardBuilder.getCardsForFlushRank();
-
-        // act
-        HandRank rank = pairRankEvaluator.getRank(cards);
-
-        // assert
-        assertNull(rank);
-    }
 }
