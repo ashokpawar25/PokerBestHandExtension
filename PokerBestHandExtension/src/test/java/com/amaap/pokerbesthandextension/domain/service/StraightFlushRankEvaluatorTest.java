@@ -5,31 +5,33 @@ import com.amaap.pokerbesthandextension.repository.dto.CardDto;
 import com.amaap.pokerbesthandextension.repository.dto.builder.CardBuilder;
 import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidCardCodeException;
 import org.junit.jupiter.api.Test;
+
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-class StraightRankEvaluatorTest {
-    StraightRankEvaluator straightRankEvaluator = new StraightRankEvaluator();
+class StraightFlushRankEvaluatorTest {
+    StraightFlushRankEvaluator straightFlushRankEvaluator = new StraightFlushRankEvaluator();
     @Test
-    void shouldBeAbleToEvaluateStraightRank() throws InvalidCardCodeException {
+    void shouldBeAbleToEvaluateStraightFlushRank() throws InvalidCardCodeException {
         // arrange
-        List<CardDto> cards = CardBuilder.getCardsForStraightRank();
-        HandRank expected = HandRank.STRAIGHT;
+        List<CardDto> cards = CardBuilder.getCardsForStraightFlushRank();
+        HandRank expected = HandRank.STRAIGHTFLUSH;
 
         // act
-        HandRank actual = straightRankEvaluator.getRank(cards);
+        HandRank actual = straightFlushRankEvaluator.getRank(cards);
 
         // assert
         assertEquals(expected,actual);
     }
 
     @Test
-    void shouldBeAbleToGetNullWhenRankIsNotStraight() throws InvalidCardCodeException {
+    void shouldBeAbleToGetNullWhenRankIsNotStraightFlush() throws InvalidCardCodeException {
         // arrange
         List<CardDto> cards = CardBuilder.getFiveCards();
 
         // act
-        HandRank rank = straightRankEvaluator.getRank(cards);
+        HandRank rank = straightFlushRankEvaluator.getRank(cards);
 
         // assert
         assertNull(rank);
