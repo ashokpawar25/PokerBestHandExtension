@@ -9,12 +9,15 @@ public class HandEvaluatorChain {
     RankEvaluator rankEvaluator;
     public HandEvaluatorChain()
     {
-        this.rankEvaluator = new FourOfAKindRankEvaluator()
+        this.rankEvaluator = new FullHouseRankEvaluator()
+                .setNextEvaluator(new FourOfAKindRankEvaluator()
                 .setNextEvaluator(new ThreeOfAKindRankEvaluator()
-                        .setNextEvaluator(new PairRankEvaluator()
-                                .setNextEvaluator(new StraightFlushRankEvaluator()
-                                .setNextEvaluator(new StraightRankEvaluator()
-                                .setNextEvaluator(new FlushRankEvaluator())))));
+                .setNextEvaluator(new TwoPairRankEvaluator()
+                .setNextEvaluator(new StraightFlushRankEvaluator()
+                .setNextEvaluator(new StraightRankEvaluator()
+                .setNextEvaluator(new FlushRankEvaluator()
+                .setNextEvaluator(new PairRankEvaluator()
+                )))))));
     }
     public HandRank getRank(List<CardDto> cards) {
         return rankEvaluator.getRank(cards);

@@ -77,4 +77,21 @@ public class CardBuilder {
         return List.of(card1,card2,card3,card4,card5);
     }
 
+    public static List<CardDto> getCardsForTwoPairRank() throws InvalidCardCodeException {
+        CardDto card1 = CardDto.create("HA");
+        CardDto card2 = CardDto.create("C9");
+        CardDto card3 = CardDto.create("S2");
+        CardDto card4 = CardDto.create("DA");
+        CardDto card5 = CardDto.create("C9");
+        return List.of(card1,card2,card3,card4,card5);
+    }
+
+    public static List<CardDto> getCardsForFullHouseRank() throws InvalidCardCodeException {
+        CardDto card1 = CardDto.create("HA");
+        CardDto card2 = CardDto.create("C9");
+        CardDto card3 = CardDto.create("SA");
+        CardDto card4 = CardDto.create("DA");
+        CardDto card5 = CardDto.create("C9");
+        return List.of(card1,card2,card3,card4,card5);
+    }
 }

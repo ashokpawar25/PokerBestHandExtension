@@ -107,4 +107,32 @@ public class GameControllerTest {
         // assert
         assertEquals(expected,actual);
     }
+
+    @Test
+    void shouldBeAbleToCheckTwoPairRankForHand() throws InvalidHandSizeException, HandNotFoundException, InvalidCardCodeException {
+        // arrange
+        List<CardDto> cards = CardBuilder.getCardsForTwoPairRank();
+        HandRank expected = HandRank.TWOPAIR;
+
+        // act
+        Hand hand = handService.create(cards);
+        HandRank actual = gameController.checkRankFor(hand);
+
+        // assert
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    void shouldBeAbleToCheckFullHouseRankForHand() throws InvalidHandSizeException, HandNotFoundException, InvalidCardCodeException {
+        // arrange
+        List<CardDto> cards = CardBuilder.getCardsForFullHouseRank();
+        HandRank expected = HandRank.FULLHOUSE;
+
+        // act
+        Hand hand = handService.create(cards);
+        HandRank actual = gameController.checkRankFor(hand);
+
+        // assert
+        assertEquals(expected,actual);
+    }
 }

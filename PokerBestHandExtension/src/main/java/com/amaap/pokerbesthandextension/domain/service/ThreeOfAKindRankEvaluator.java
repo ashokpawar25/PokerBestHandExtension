@@ -3,26 +3,34 @@ package com.amaap.pokerbesthandextension.domain.service;
 import com.amaap.pokerbesthandextension.domain.model.valueobject.HandRank;
 import com.amaap.pokerbesthandextension.repository.dto.CardDto;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ThreeOfAKindRankEvaluator implements RankEvaluator {
     private RankEvaluator nextEvaluator;
 
     @Override
     public HandRank getRank(List<CardDto> cards) {
-        return isThreeOfAKindRank(cards) ? HandRank.THREEOFAKIND : ( nextEvaluator != null ? nextEvaluator.getRank(cards) : null);
+        return isThreeOfAKindRank(cards) ? HandRank.THREEOFAKIND : (nextEvaluator != null ? nextEvaluator.getRank(cards) : null);
     }
 
     private boolean isThreeOfAKindRank(List<CardDto> cards) {
-        int count = 0;
-        for (int i = 0; i < cards.size(); i++) {
-            for (int j = i + 1; j < cards.size(); j++) {
-                if (cards.get(i).getRank().equals(cards.get(j).getRank())) {
-                    count++;
-                }
+        Map<String, Integer> count = new HashMap<>();
+        for (CardDto card : cards) {
+            String rank = card.getRank();
+            if (count.containsKey(rank)) {
+                int frequency = count.get(rank);
+                count.put(rank, ++frequency);
+            } else{
+                count.put(rank,1);
             }
         }
-        return count >= 3;
+        for(int frequency: count.values())
+        {
+            if(frequency == 3) return true;
+        }
+        return false;
     }
 
     @Override
