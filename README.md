@@ -18,6 +18,9 @@ The new hand rankings are:
 High card rule should return the highest card as well,
 Example ["S2" "D5" "C7" "ST" "HA"] should return, "high-card-ace"
 
+## Design Pattern - Chain of responsibility
+-For the solution of pocker best hand extension I employed the Chain of Responsibility design pattern to create a chain of rank evaluators. Each evaluator in the chain is responsible for determining if a given hand matches a specific poker hand rank. If a match is found, the evaluation process stops; otherwise, it proceeds to the next evaluator in the chain.
+
 # domain Package - It consist domain models and domain services
 ## model.valueobject Package - It consist value object classes
 
