@@ -6,7 +6,7 @@ import com.amaap.pokerbesthandextension.repository.dto.CardDto;
 import java.util.List;
 
 public class HandEvaluatorChain {
-    RankEvaluator rankEvaluator;
+    private final RankEvaluator rankEvaluator;
     public HandEvaluatorChain()
     {
         this.rankEvaluator = new FullHouseRankEvaluator()

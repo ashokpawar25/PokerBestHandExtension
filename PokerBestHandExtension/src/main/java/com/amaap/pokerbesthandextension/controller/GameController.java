@@ -14,4 +14,8 @@ public class GameController {
     public HandRank checkRankFor(Hand hand) throws HandNotFoundException {
         return gameService.checkRankFor(hand);
     }
+
+    public String getHighCard(Hand hand) throws HandNotFoundException {
+        return gameService.getHighCard(hand);
+    }
 }

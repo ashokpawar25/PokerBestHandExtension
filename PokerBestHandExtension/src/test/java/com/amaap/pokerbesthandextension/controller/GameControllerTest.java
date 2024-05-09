@@ -149,4 +149,18 @@ public class GameControllerTest {
         // assert
         assertEquals(expected,actual);
     }
+
+    @Test
+    void shouldBeAbleToGetHighCardForHand() throws InvalidHandSizeException, HandNotFoundException, InvalidCardCodeException {
+        // arrange
+        List<CardDto> cards = CardBuilder.getCardsForHighCardRank();
+        String expected = "high-card-ace";
+
+        // act
+        Hand hand = handService.create(cards);
+        String actual = gameController.getHighCard(hand);
+
+        // assert
+        assertEquals(expected,actual);
+    }
 }

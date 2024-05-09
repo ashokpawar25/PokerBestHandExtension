@@ -14,12 +14,9 @@ public class PairRankEvaluator implements RankEvaluator {
     }
 
     private boolean isPairRank(List<CardDto> cards) {
-        CardDto[] cardsArray = cards.toArray(new CardDto[0]);
-        for (int i = 0; i < cardsArray.length; i++) {
-            for (int j = i + 1; j < cardsArray.length; j++) {
-                if (cardsArray[i].getRank().equalsIgnoreCase(cardsArray[j].getRank())) {
-                    return true;
-                }
+        for (int i = 0; i < cards.size(); i++) {
+            for (int j = i + 1; j < cards.size(); j++) {
+                if (cards.get(i).getRank().equals(cards.get(j).getRank())) return true;
             }
         }
         return false;

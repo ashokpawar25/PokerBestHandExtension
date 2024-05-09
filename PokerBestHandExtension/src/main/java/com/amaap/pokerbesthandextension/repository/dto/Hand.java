@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Hand {
-    private List<CardDto> cards;
+    private final List<CardDto> cards;
     public Hand(List<CardDto> cards) {
         this.cards = cards;
     }
