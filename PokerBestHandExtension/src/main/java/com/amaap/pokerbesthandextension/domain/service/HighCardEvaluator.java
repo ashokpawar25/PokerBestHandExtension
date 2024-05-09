@@ -14,40 +14,25 @@ public class HighCardEvaluator {
                 highRank = card.getRank();
             }
         }
-        assert highRank != null;
         return "high-card-"+getRankName(highRank);
     }
 
     private static String getRankName(String rank) {
-        switch (rank.toUpperCase()) {
-            case "A":
-                return "ace";
-            case "K":
-                return "king";
-            case "Q":
-                return "queen";
-            case "J":
-                return "jack";
-            case "T":
-                return "ten";
-            case "9":
-                return "nine";
-            case "8":
-                return "eight";
-            case "7":
-                return "seven";
-            case "6":
-                return "six";
-            case "5":
-                return "five";
-            case "4":
-                return "four";
-            case "3":
-                return "three";
-            case "2":
-                return "two";
-            default:
-                return "unknown";
-        }
+        return switch (rank.toUpperCase()) {
+            case "A" -> "ace";
+            case "K" -> "king";
+            case "Q" -> "queen";
+            case "J" -> "jack";
+            case "T" -> "ten";
+            case "9" -> "nine";
+            case "8" -> "eight";
+            case "7" -> "seven";
+            case "6" -> "six";
+            case "5" -> "five";
+            case "4" -> "four";
+            case "3" -> "three";
+            case "2" -> "two";
+            default -> "unknown";
+        };
     }
 }
