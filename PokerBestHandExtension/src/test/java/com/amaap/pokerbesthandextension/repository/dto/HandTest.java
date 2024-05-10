@@ -33,4 +33,21 @@ class HandTest {
         assertThrows(InvalidHandSizeException.class,()->Hand.create(cards));
     }
 
+    @Test
+    void shouldBeAbleToCheckEqualityOfInstanceOfClass() throws InvalidCardCodeException {
+        // arrange
+        List<CardDto> list1 = CardBuilder.getFiveCards();
+        List<CardDto> list2 = CardBuilder.getCardsForFlushRank();
+        Hand hand1 = new Hand(list1);
+        Hand hand2 = new Hand(list1);
+        Hand hand3 = new Hand(list2);
+        Object object = new Object();
+
+        // act & assert
+        assertTrue(hand1.equals(hand1));
+        assertTrue(hand1.equals(hand2));
+        assertFalse(hand1.equals(hand3));
+        assertFalse(hand1.equals(object));
+        assertFalse(hand1.equals(null));
+    }
 }

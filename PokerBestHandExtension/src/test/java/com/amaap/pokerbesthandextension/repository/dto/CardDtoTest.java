@@ -17,14 +17,30 @@ class CardDtoTest {
         CardDto actual = CardDto.create(code);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
-    void shouldBeAbleToThrowExceptionWhenInvalidCardCodeIsPassed()
+    void shouldBeAbleToThrowExceptionWhenInvalidCardCodeIsPassed() {
+        assertThrows(InvalidCardCodeException.class, () -> CardDto.create("G2"));
+        assertThrows(InvalidCardCodeException.class, () -> CardDto.create("SD"));
+        assertThrows(InvalidCardCodeException.class, () -> CardDto.create(""));
+    }
+
+    @Test
+    void shouldBeAbleToCheckEqualityOfInstanceOfClass()
     {
-        assertThrows(InvalidCardCodeException.class,()->CardDto.create("G2"));
-        assertThrows(InvalidCardCodeException.class,()->CardDto.create("SD"));
-        assertThrows(InvalidCardCodeException.class,()->CardDto.create(""));
+        // arrange
+        CardDto card1 = new CardDto("H4");
+        CardDto card2 = new CardDto("H4");
+        CardDto card3 = new CardDto("H6");
+        Object object = new Object();
+
+        // act & assert
+        assertTrue(card1.equals(card1));
+        assertTrue(card1.equals(card2));
+        assertFalse(card1.equals(card3));
+        assertFalse(card1.equals(object));
+        assertFalse(card1.equals(null));
     }
 }

@@ -48,4 +48,14 @@ class CardValidatorTest {
         assertTrue(isNullCode(null));
         assertFalse(isNullCode(""));
     }
+
+    @Test
+    void shouldBeAbleToCreateInstanceOfClass()
+    {
+        // arrange & act
+        CardValidator cardValidator = new CardValidator();
+
+        // assert
+        assertNotNull(cardValidator);
+    }
 }

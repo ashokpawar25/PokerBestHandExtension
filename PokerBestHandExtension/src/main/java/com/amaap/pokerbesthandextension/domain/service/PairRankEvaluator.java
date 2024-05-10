@@ -6,11 +6,10 @@ import com.amaap.pokerbesthandextension.repository.dto.CardDto;
 import java.util.List;
 
 public class PairRankEvaluator implements RankEvaluator {
-    private RankEvaluator nextEvaluator;
 
     @Override
     public HandRank getRank(List<CardDto> cards) {
-        return isPairRank(cards) ? HandRank.PAIR : (nextEvaluator != null ? nextEvaluator.getRank(cards) : HandRank.HIGHCARD);
+        return isPairRank(cards) ? HandRank.PAIR : HandRank.HIGHCARD;
     }
 
     private boolean isPairRank(List<CardDto> cards) {
@@ -24,7 +23,6 @@ public class PairRankEvaluator implements RankEvaluator {
 
     @Override
     public RankEvaluator setNextEvaluator(RankEvaluator nextEvaluator) {
-        this.nextEvaluator = nextEvaluator;
-        return this;
+        return null;
     }
 }
