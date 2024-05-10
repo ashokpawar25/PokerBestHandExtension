@@ -4,9 +4,12 @@ import com.amaap.pokerbesthandextension.repository.CardRepository;
 import com.amaap.pokerbesthandextension.repository.db.impl.exception.DuplicateCardException;
 import com.amaap.pokerbesthandextension.repository.dto.CardDto;
 import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidCardCodeException;
+import jakarta.inject.Inject;
 
 public class CardService {
     private final CardRepository cardRepository;
+
+    @Inject
     public CardService(CardRepository cardRepository) {
         this.cardRepository = cardRepository;
     }

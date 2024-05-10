@@ -1,5 +1,7 @@
 package com.amaap.pokerbesthandextension.service;
 
+import com.amaap.pokerbesthandextension.AppModule;
+import com.amaap.pokerbesthandextension.controller.CardController;
 import com.amaap.pokerbesthandextension.repository.HandRepository;
 import com.amaap.pokerbesthandextension.repository.db.InMemoryDatabase;
 import com.amaap.pokerbesthandextension.repository.db.impl.FakeInMemoryDatabase;
@@ -12,6 +14,9 @@ import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidCardCode
 import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidHandSizeException;
 import com.amaap.pokerbesthandextension.repository.impl.InMemoryCardRepository;
 import com.amaap.pokerbesthandextension.repository.impl.InMemoryHandRepository;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -21,9 +26,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class HandServiceTest {
 
-    InMemoryDatabase inMemoryDatabase = new FakeInMemoryDatabase();
-    HandRepository handRepository = new InMemoryHandRepository(inMemoryDatabase);
-    HandService handService = new HandService(handRepository);
+    HandService handService ;
+
+    @BeforeEach
+    void setUp() {
+        Injector injector = Guice.createInjector(new AppModule());
+        handService = injector.getInstance(HandService.class);
+    }
 
     @Test
     void shouldBeAbleToCreateHand() throws InvalidHandSizeException, InvalidCardCodeException {

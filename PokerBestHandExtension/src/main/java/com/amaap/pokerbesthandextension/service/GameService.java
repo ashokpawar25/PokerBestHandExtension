@@ -6,12 +6,15 @@ import com.amaap.pokerbesthandextension.domain.service.HighCardEvaluator;
 import com.amaap.pokerbesthandextension.repository.db.impl.exception.HandNotFoundException;
 import com.amaap.pokerbesthandextension.repository.dto.CardDto;
 import com.amaap.pokerbesthandextension.repository.dto.Hand;
+import jakarta.inject.Inject;
 
 import java.util.List;
 
 public class GameService {
     private final HandEvaluatorChain handEvaluatorChain;
     private final HandService handService;
+
+    @Inject
     public GameService(HandEvaluatorChain handEvaluatorChain, HandService handService) {
         this.handEvaluatorChain = handEvaluatorChain;
         this.handService = handService;

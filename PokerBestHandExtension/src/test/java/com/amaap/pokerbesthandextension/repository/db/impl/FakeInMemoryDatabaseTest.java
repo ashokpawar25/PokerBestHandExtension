@@ -1,5 +1,7 @@
 package com.amaap.pokerbesthandextension.repository.db.impl;
 
+import com.amaap.pokerbesthandextension.AppModule;
+import com.amaap.pokerbesthandextension.controller.CardController;
 import com.amaap.pokerbesthandextension.repository.db.impl.exception.DuplicateCardException;
 import com.amaap.pokerbesthandextension.repository.db.impl.exception.HandNotFoundException;
 import com.amaap.pokerbesthandextension.repository.dto.CardDto;
@@ -7,6 +9,9 @@ import com.amaap.pokerbesthandextension.repository.dto.Hand;
 import com.amaap.pokerbesthandextension.repository.dto.builder.CardBuilder;
 import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidCardCodeException;
 import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidHandSizeException;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -14,7 +19,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FakeInMemoryDatabaseTest {
-    FakeInMemoryDatabase fakeInMemoryDatabase = new FakeInMemoryDatabase();
+    FakeInMemoryDatabase fakeInMemoryDatabase ;
+
+    @BeforeEach
+    void setUp() {
+        Injector injector = Guice.createInjector(new AppModule());
+        fakeInMemoryDatabase = injector.getInstance(FakeInMemoryDatabase.class);
+    }
 
     @Test
     void shouldBeAbleToAddCardIntoDatabase() throws DuplicateCardException {

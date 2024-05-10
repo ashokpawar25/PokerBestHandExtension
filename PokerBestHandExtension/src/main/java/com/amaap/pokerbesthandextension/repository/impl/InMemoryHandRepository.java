@@ -5,11 +5,14 @@ import com.amaap.pokerbesthandextension.repository.db.InMemoryDatabase;
 import com.amaap.pokerbesthandextension.repository.db.impl.exception.HandNotFoundException;
 import com.amaap.pokerbesthandextension.repository.dto.CardDto;
 import com.amaap.pokerbesthandextension.repository.dto.Hand;
+import jakarta.inject.Inject;
 
 import java.util.List;
 
 public class InMemoryHandRepository implements HandRepository {
-    InMemoryDatabase inMemoryDatabase;
+    private final InMemoryDatabase inMemoryDatabase;
+
+    @Inject
     public InMemoryHandRepository(InMemoryDatabase inMemoryDatabase) {
         this.inMemoryDatabase = inMemoryDatabase;
     }

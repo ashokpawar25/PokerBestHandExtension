@@ -1,17 +1,17 @@
 package com.amaap.pokerbesthandextension.controller;
 
+import com.amaap.pokerbesthandextension.AppModule;
 import com.amaap.pokerbesthandextension.domain.model.valueobject.HandRank;
-import com.amaap.pokerbesthandextension.domain.service.HandEvaluatorChain;
-import com.amaap.pokerbesthandextension.repository.db.impl.FakeInMemoryDatabase;
 import com.amaap.pokerbesthandextension.repository.db.impl.exception.HandNotFoundException;
 import com.amaap.pokerbesthandextension.repository.dto.CardDto;
 import com.amaap.pokerbesthandextension.repository.dto.Hand;
 import com.amaap.pokerbesthandextension.repository.dto.builder.CardBuilder;
 import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidCardCodeException;
 import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidHandSizeException;
-import com.amaap.pokerbesthandextension.repository.impl.InMemoryHandRepository;
-import com.amaap.pokerbesthandextension.service.GameService;
 import com.amaap.pokerbesthandextension.service.HandService;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -19,10 +19,15 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GameControllerTest {
-    HandEvaluatorChain handEvaluatorChain = new HandEvaluatorChain();
-    HandService handService = new HandService(new InMemoryHandRepository(new FakeInMemoryDatabase()));
-    GameService gameService = new GameService(handEvaluatorChain,handService);
-    GameController gameController = new GameController(gameService);
+    HandService handService;
+    GameController gameController;
+
+    @BeforeEach
+    void setUp() {
+        Injector injector = Guice.createInjector(new AppModule());
+        gameController = injector.getInstance(GameController.class);
+        handService = injector.getInstance(HandService.class);
+    }
 
     @Test
     void shouldBeAbleToCheckFlushRankForHand() throws InvalidHandSizeException, HandNotFoundException, InvalidCardCodeException {
@@ -35,7 +40,7 @@ public class GameControllerTest {
         HandRank actual = gameController.checkRankFor(hand);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -49,7 +54,7 @@ public class GameControllerTest {
         HandRank actual = gameController.checkRankFor(hand);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -63,7 +68,7 @@ public class GameControllerTest {
         HandRank actual = gameController.checkRankFor(hand);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -77,7 +82,7 @@ public class GameControllerTest {
         HandRank actual = gameController.checkRankFor(hand);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -91,7 +96,7 @@ public class GameControllerTest {
         HandRank actual = gameController.checkRankFor(hand);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -105,7 +110,7 @@ public class GameControllerTest {
         HandRank actual = gameController.checkRankFor(hand);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -119,7 +124,7 @@ public class GameControllerTest {
         HandRank actual = gameController.checkRankFor(hand);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -133,7 +138,7 @@ public class GameControllerTest {
         HandRank actual = gameController.checkRankFor(hand);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -147,7 +152,7 @@ public class GameControllerTest {
         HandRank actual = gameController.checkRankFor(hand);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -161,6 +166,6 @@ public class GameControllerTest {
         String actual = gameController.getHighCard(hand);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 }

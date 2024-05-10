@@ -5,11 +5,14 @@ import com.amaap.pokerbesthandextension.repository.db.impl.exception.HandNotFoun
 import com.amaap.pokerbesthandextension.repository.dto.CardDto;
 import com.amaap.pokerbesthandextension.repository.dto.Hand;
 import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidHandSizeException;
+import jakarta.inject.Inject;
 
 import java.util.List;
 
 public class HandService {
     private final HandRepository handRepository;
+
+    @Inject
     public HandService(HandRepository handRepository) {
         this.handRepository = handRepository;
     }

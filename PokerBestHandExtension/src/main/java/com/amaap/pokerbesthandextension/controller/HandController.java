@@ -7,11 +7,13 @@ import com.amaap.pokerbesthandextension.repository.dto.CardDto;
 import com.amaap.pokerbesthandextension.repository.dto.Hand;
 import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidHandSizeException;
 import com.amaap.pokerbesthandextension.service.HandService;
+import jakarta.inject.Inject;
 
 import java.util.List;
 
 public class HandController {
-    HandService handService;
+    private final HandService handService;
+    @Inject
     public HandController(HandService handService) {
         this.handService = handService;
     }

@@ -1,5 +1,7 @@
 package com.amaap.pokerbesthandextension.service;
 
+import com.amaap.pokerbesthandextension.AppModule;
+import com.amaap.pokerbesthandextension.controller.CardController;
 import com.amaap.pokerbesthandextension.controller.dto.HttpStatus;
 import com.amaap.pokerbesthandextension.controller.dto.Response;
 import com.amaap.pokerbesthandextension.repository.CardRepository;
@@ -9,14 +11,21 @@ import com.amaap.pokerbesthandextension.repository.db.impl.exception.DuplicateCa
 import com.amaap.pokerbesthandextension.repository.dto.CardDto;
 import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidCardCodeException;
 import com.amaap.pokerbesthandextension.repository.impl.InMemoryCardRepository;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CardServiceTest {
-    InMemoryDatabase inMemoryDatabase = new FakeInMemoryDatabase();
-    CardRepository cardRepository = new InMemoryCardRepository(inMemoryDatabase);
-    CardService cardService = new CardService(cardRepository);
+    CardService cardService ;
+
+    @BeforeEach
+    void setUp() {
+        Injector injector = Guice.createInjector(new AppModule());
+        cardService = injector.getInstance(CardService.class);
+    }
 
     @Test
     void shouldBeAbleToCreateCard() throws InvalidCardCodeException, DuplicateCardException {

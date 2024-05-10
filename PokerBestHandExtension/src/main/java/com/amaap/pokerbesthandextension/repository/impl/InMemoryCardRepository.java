@@ -4,9 +4,12 @@ import com.amaap.pokerbesthandextension.repository.CardRepository;
 import com.amaap.pokerbesthandextension.repository.db.InMemoryDatabase;
 import com.amaap.pokerbesthandextension.repository.db.impl.exception.DuplicateCardException;
 import com.amaap.pokerbesthandextension.repository.dto.CardDto;
+import jakarta.inject.Inject;
 
 public class InMemoryCardRepository implements CardRepository {
-    InMemoryDatabase inMemoryDatabase;
+    private final InMemoryDatabase inMemoryDatabase;
+
+    @Inject
     public InMemoryCardRepository(InMemoryDatabase inMemoryDatabase) {
         this.inMemoryDatabase = inMemoryDatabase;
     }

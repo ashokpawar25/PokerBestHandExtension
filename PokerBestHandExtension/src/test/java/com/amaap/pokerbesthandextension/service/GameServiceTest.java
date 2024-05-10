@@ -1,5 +1,7 @@
 package com.amaap.pokerbesthandextension.service;
 
+import com.amaap.pokerbesthandextension.AppModule;
+import com.amaap.pokerbesthandextension.controller.CardController;
 import com.amaap.pokerbesthandextension.domain.model.valueobject.HandRank;
 import com.amaap.pokerbesthandextension.domain.service.HandEvaluatorChain;
 import com.amaap.pokerbesthandextension.repository.db.impl.FakeInMemoryDatabase;
@@ -10,6 +12,9 @@ import com.amaap.pokerbesthandextension.repository.dto.builder.CardBuilder;
 import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidCardCodeException;
 import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidHandSizeException;
 import com.amaap.pokerbesthandextension.repository.impl.InMemoryHandRepository;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -17,9 +22,15 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GameServiceTest {
-    HandEvaluatorChain handEvaluatorChain = new HandEvaluatorChain();
-    HandService handService = new HandService(new InMemoryHandRepository(new FakeInMemoryDatabase()));
-    GameService gameService = new GameService(handEvaluatorChain, handService);
+    HandService handService ;
+    GameService gameService ;
+
+    @BeforeEach
+    void setUp() {
+        Injector injector = Guice.createInjector(new AppModule());
+        handService = injector.getInstance(HandService.class);
+        gameService = injector.getInstance(GameService.class);
+    }
 
     @Test
     void shouldBeAbleToCheckFlushRankForHand() throws InvalidHandSizeException, HandNotFoundException, InvalidCardCodeException {

@@ -1,15 +1,15 @@
 package com.amaap.pokerbesthandextension.repository.impl;
 
-import com.amaap.pokerbesthandextension.repository.db.InMemoryDatabase;
-import com.amaap.pokerbesthandextension.repository.db.impl.FakeInMemoryDatabase;
-import com.amaap.pokerbesthandextension.repository.db.impl.exception.DuplicateCardException;
+import com.amaap.pokerbesthandextension.AppModule;
 import com.amaap.pokerbesthandextension.repository.db.impl.exception.HandNotFoundException;
 import com.amaap.pokerbesthandextension.repository.dto.CardDto;
 import com.amaap.pokerbesthandextension.repository.dto.Hand;
 import com.amaap.pokerbesthandextension.repository.dto.builder.CardBuilder;
 import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidCardCodeException;
 import com.amaap.pokerbesthandextension.repository.dto.exception.InvalidHandSizeException;
-import com.amaap.pokerbesthandextension.service.CardService;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -18,9 +18,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class InMemoryHandRepositoryTest {
+    InMemoryHandRepository inMemoryHandRepository;
 
-    InMemoryDatabase inMemoryDatabase = new FakeInMemoryDatabase();
-    InMemoryHandRepository inMemoryHandRepository = new InMemoryHandRepository(inMemoryDatabase);
+    @BeforeEach
+    void setUp() {
+        Injector injector = Guice.createInjector(new AppModule());
+        inMemoryHandRepository = injector.getInstance(InMemoryHandRepository.class);
+    }
 
     @Test
     void shouldBeAbleToAddHandInRepository() throws InvalidCardCodeException {
@@ -56,6 +60,6 @@ class InMemoryHandRepositoryTest {
         Hand hand = Hand.create(cards);
 
         // act & assert
-        assertThrows(HandNotFoundException.class,()->inMemoryHandRepository.getCardsForHand(hand));
+        assertThrows(HandNotFoundException.class, () -> inMemoryHandRepository.getCardsForHand(hand));
     }
 }
