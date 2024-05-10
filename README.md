@@ -21,6 +21,9 @@ Example ["S2" "D5" "C7" "ST" "HA"] should return, "high-card-ace"
 ## Design Pattern - Chain of responsibility
 -For the solution of pocker best hand extension I employed the Chain of Responsibility design pattern to create a chain of rank evaluators. Each evaluator in the chain is responsible for determining if a given hand matches a specific poker hand rank. If a match is found, the evaluation process stops; otherwise, it proceeds to the next evaluator in the chain.
 
+![image](https://github.com/ashokpawar25/PokerBestHandExtension/assets/117933840/9e60b334-fb32-426d-92fc-7c228b9ae897)
+
+
 # domain Package - It consist domain models and domain services
 ## model.valueobject Package - It consist value object classes
 
@@ -126,6 +129,11 @@ Example ["S2" "D5" "C7" "ST" "HA"] should return, "high-card-ace"
 ### Behaviors
 - `public HandRank getRank(List<CardDto> cards)`
 
+## HighCardEvaluator
+### Behaviors
+- `public static String getHighCard(List<CardDto> cards)`
+- `private static String getRankName(String rank)`
+
 # controller Package - This package having controller classes
 
 ## CardController
@@ -160,6 +168,7 @@ Example ["S2" "D5" "C7" "ST" "HA"] should return, "high-card-ace"
 
 ### Behaviors
 - `public HandRank checkRankFor(Hand hand)`
+- `public String getHighCard(Hand hand)`
 
 ## controller.dto Package - This package consist class to return http status from the controller methods
 ## HttpStatus
@@ -209,6 +218,7 @@ Example ["S2" "D5" "C7" "ST" "HA"] should return, "high-card-ace"
 
 ### Behaviors
 - `public HandRank checkRankFor(Hand hand)`
+- `public String getHighCard(Hand hand)`
 
 # Repository Package - Classes from this package interact with the database, performing operations requested by the services.
 
